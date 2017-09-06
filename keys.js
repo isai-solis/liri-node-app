@@ -18,3 +18,9 @@ exports.twitterKeys = {
 // Access Level	Read and write
 // Owner	solisisai1
 // Owner ID	903753557626822658
+
+//SPOTIFY keys
+//Client ID
+// 490abdc4cee34c4caa369ff1a7141db8
+// Client Secret
+// 581b875f360c408abb914274bafb9aec
