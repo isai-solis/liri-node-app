@@ -15,7 +15,6 @@ var itemName = "";
         }
     }
     
-
 var client = new Twitter(keys.twitterKeys);
 function myTweets(){
     var params = 
@@ -25,14 +24,14 @@ function myTweets(){
     };
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (!error) {
-        for (var i=0; i<tweets.length; i++){    
-            console.log(
-            "\n" + 
-            "Created: " + tweets[i].created_at +
-            "\nUserhandle: " + tweets[i].user.screen_name +
-            "\nTweet: " + tweets[i].text +
-            "\n=============================================" + 
-            "\n");
+            for (var i=0; i<tweets.length; i++){    
+                console.log(
+                "\n" + 
+                "Created: " + tweets[i].created_at +
+                "\nUserhandle: " + tweets[i].user.screen_name +
+                "\nTweet: " + tweets[i].text +
+                "\n============================================="
+                );
             }
         }
     });
@@ -40,14 +39,17 @@ function myTweets(){
 
 function spotifySong(){
     var spotify = new Spotify(keys.spotifyKeys);
-       
-    spotify.search({ type: 'track', query: 'All the Small Things'}, function(err, data) {
+    
+    if(!itemName){
+        itemName = "The Sign";
+        console.log("You didn't input a song, so here is default song information:" + "\n");
+    }
+
+    spotify.search({ type: 'track', query: itemName}, function(err, data) {
         if (err) {
         return console.log('Error occurred: ' + err);
         }
-        
-        // var songData = data;
-
+                
         for (var i=0; i<data.tracks.items.length; i++)
         console.log( 
             "\n" +
@@ -58,13 +60,10 @@ function spotifySong(){
             "\n=============================================" +
             "\n"
         ); 
-    
+        
     });
 
 };
-
-
-
 
 function omdbMovie(){
     var queryUrl = "http://www.omdbapi.com/?t=" + itemName + "&y=&plot=short&apikey=40e9cece";
@@ -76,13 +75,12 @@ function omdbMovie(){
                 "\nTitle: " + JSON.parse(body).Title +
                 "\nRelease Year: " + JSON.parse(body).Year +
                 "\nIMDB Rating: " + JSON.parse(body).imdbRating +
-                "\nRotten Tomatoes Score: " + JSON.parse(body).Ratings[1].Value +
+                // "\nRotten Tomatoes Score: " + JSON.parse(body).Ratings[1].Value +
                 "\nCountry Produced: " + JSON.parse(body).Country +
                 "\nLanguage(s): " + JSON.parse(body).Language +
                 "\nPlot: " + JSON.parse(body).Plot +
                 "\nActors: " + JSON.parse(body).Actors +
-                "\n======================================="
-                
+                "\n======================================="                
             );
         }
     });
@@ -93,11 +91,32 @@ function doWhat(){
         if (error){
             return console.log("error")
         }
-        else
-            console.log(data)
+        else{
+            var dataArr = data.split(",");        
+            action = dataArr[0];
+            itemName = dataArr[1];
+
+            switch (action) {
+                case "my-tweets":
+                  myTweets();
+                  break;
+              
+                case "spotify-this-song":
+                  spotifySong();
+                  break;
+              
+                case "movie-this":
+                  omdbMovie();
+                  break;
+              
+                case "do-what-it-says":
+                  doWhat();
+                  break;
+            }
+            
+        }  
     })
 }; 
-
 
 switch (action) {
     case "my-tweets":
@@ -115,4 +134,4 @@ switch (action) {
     case "do-what-it-says":
       doWhat();
       break;
-  }
+}
