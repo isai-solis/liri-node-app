@@ -1,10 +1,10 @@
 console.log('this is loaded');
 
 exports.twitterKeys = {
-  consumer_key: '<input here>',
-  consumer_secret: '<input here>',
-  access_token_key: '<input here>',
-  access_token_secret: '<input here>',
+  consumer_key: 'AvOdcVhLN3dsQc7DOUVd3aZyc',
+  consumer_secret: 'IbogMkYPlzzAIzq1cIWResVLhnfwoGiVv9WBBRCdgNETVpTjjr',
+  access_token_key: '903753557626822658-IEkn6dDgHTERduzaJS6bDDXlhD0mR6X',
+  access_token_secret: 'yPDJ35Par9uu2W9nkO7NRzfp5mD9pMUNtzc6VhmoVdHbP',
 }
 
 // Consumer Key (API Key)	AvOdcVhLN3dsQc7DOUVd3aZyc
@@ -20,7 +20,10 @@ exports.twitterKeys = {
 // Owner ID	903753557626822658
 
 //SPOTIFY keys
-//Client ID
-// 490abdc4cee34c4caa369ff1a7141db8
-// Client Secret
-// 581b875f360c408abb914274bafb9aec
+
+exports.spotifyKeys = {
+  id: "490abdc4cee34c4caa369ff1a7141db8",
+  secret: "581b875f360c408abb914274bafb9aec"
+
+}
+
